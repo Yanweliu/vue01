@@ -7,8 +7,20 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="app">{{message}}
+    <ul>
+        <li v-for="item in movies">{{item}}</li>
+    </ul>
+    </div>
+    <script src="vue/vue.js"></script>
     <script> 
-        var a;
+        const app = new Vue({
+            el: '#app',
+            data: {
+                message: '你好啊，李银河!',
+                movies: ['星际穿越','盗梦空间','敦刻尔克']
+            }
+        })
    </script>
 
 <input type="button" value="你好">
