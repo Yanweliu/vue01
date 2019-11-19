@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>mustache(胡子语法)</title>
+
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- mustache语法不仅可以直写变量，也可以写简单的表达式 -->
+    <div id="app">
+        <h2 v-once>{{message}}</h2>
+        <!-- v-once命令用来渲染一次，之后便不再响应 -->
+        <h2>{{message}}</h2>
+
+
+        <h2>{{first}} {{last}}</h2>
+        <h2>{{counter*3}}</h2>
+        <h2>{{first + last}}</h2>
+
+        <h2 v-pre>{{first +' '+ last}}</h2>
+        <!-- 把{{}}的内容不解析 -->
+        
+        <h2 v-html="url">{{link}}</h2>
+    </div>
+
+
+    <div id="app2">
+        <h2 v-cloak>{{message}}</h2> 
+        <img v-bind:src="imgURL">
+        <!-- 动态绑定地址值 用v-bind命令 -->
+        <a v-bind:href ="Href">bilibili</a>
+        <a :href = "Href">bi1</a>
+        
+    </div>
+
+
+    <script src="vue/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data:{
+                message: '你好啊，李银河',
+                first: 'webos',
+                last: 'yanwee',
+                counter: 100,
+                url: '<a href="www.yanwee.cn">哈哈</a>'
+            }
+        });
+
+
+// v-cloak(vue中为了防止加载前显示源码，而设置的属性，当定时器过后vue自动删除,下面是个例子)
+// v-cloak先把这个当成属性，设置属性display为none，就实现加载前不会出现源码，加载后属性删除
+        setTimeout(function(){
+            const app2 = new Vue({
+                el: '#app2',
+                data: {
+                message: '你好啊，王小波',
+                first: 'webos',
+                last: 'yanwee',
+                counter: 100,
+                imgURL: 'https://www.bilibili.com/video/av59594689?p=15',
+                Href: 'https//www.baidu.com'
+                }
+            })
+        }, 1000)
+        
+
+        
+    </script>
+</body>
+</html>
