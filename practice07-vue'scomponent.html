@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue组件化</title>
+    <!-- vue组件化。 1.创建组件构造器2.注册组件3.使用组件1.vue.extend({template})2.vue.component('my-cpn',mycompent) 3.<my-cpn></my-cpn>-->
+</head>
+<body>
+
+    <div id="app">
+        <cpn></cpn>
+        <cpn></cpn>
+        <cpn></cpn>
+        <cpn></cpn>
+        <cpn></cpn>
+        <cpn2></cpn2>
+        <cpn3></cpn3>
+        <cpn5></cpn5>
+    </div>
+
+
+
+
+    <template id="cpn5">
+        <div>
+            <h2>fuck</h2>
+            <p>you idiot5</p>
+                          </div>
+     </template>
+
+
+
+
+
+
+    <script src="vue/vue.js"></script>
+    <script> 
+    // 创建组件构造器
+        const cpnC =Vue.extend({
+            template:`<div><h2>stupid</h2></div>`
+        })
+    
+    // 注册组件{全局组件}
+    // Vue.component('cpn',cpnC)
+
+    
+    //全局组件注册的语法糖
+     Vue.component('cpn2',{
+        template:`
+        <div>
+            <h2>fuck</h2>
+            <p>you idiot</p>
+        </div>`
+     })
+     
+    
+
+      //组件模板分离的写法
+      Vue.component('cpn5',{
+        template:'#cpn5'
+
+      })
+      
+    const app = new Vue({
+        el:'#app',
+
+    //注册组件{局部组件}
+    components:{
+            cpn:cpnC,
+            'cpn3':{
+                template:` <div>
+            <h2>fuck</h2>
+            <p>you idiot</p>
+                          </div>`
+            }
+     }  
+
+
+   
+
+
+    })
+    </script>
+</body>
+</html>

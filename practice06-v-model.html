@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-model原理</title>
+</head>
+<body>
+    <!-- v-model的原理是用v-bind绑定data数据到页面，后向前传。用v-on绑定事件调用后面methods，通过methods的event target value 改变当前值 -->
+    <!-- <div id="app">
+        <input type="text" v-model = "message">{{message}}
+    </div> -->
+    <div id="app">
+        <input type="text" :value = "message" @input="valueChange" >{{message}}
+
+    <!-- 目前理解，用v-model与radio进行单选目的是为了方便向服务器传值，因为用name选择后服务器也不知道，v-model双向绑定可以传值 -->
+        <label for="male"><input type="radio" id="male" value="male" v-model='sex'></label>
+        <label for="female"><input type="radio" id="female" value="female" v-model='sex'></label>{{sex}}
+
+    <!-- v-model 是v-bind ：value 和 v-on ：目前浅薄的理解   -->
+        <label for="agree"><input type="checkbox" id="agree" v-model="isAgree"></label>{{isAgree}}
+        <button :disabled="!isAgree">NEXT</button>
+
+
+
+
+    <!--input值绑定，在input比较少的情况下，可以一个一个写value的值。但如果特别多就需要值绑定,即v-for遍历服务器自动添加  -->
+        <label v-for='item in Originhobbies' :for="item">
+            <input type="checkbox" :value='item' :id='item' v-model='hobbies'>{{item}}
+        </label>
+        <h2>hobbies:{{hobbies}}</h2>
+    </div>
+
+    <script src="vue/vue.js"></script>
+    <script>
+        const app =new Vue({
+            el:'#app',
+            data:{
+                message:'hello',
+                sex:"male",
+                isAgree:true ,
+                hobbies:[],
+                Originhobbies:['唱','跳','篮球']
+            },
+            methods: {
+                valueChange(event){
+                    this.message=event.target.value;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
